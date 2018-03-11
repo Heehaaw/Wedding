@@ -1,0 +1,78 @@
+<div class="col-md-8 offset-md-2 p-0 wrap">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#">Wedding</a>
+
+    <button class="navbar-toggler float-right"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse pt-2 pt-md-0">
+      <ul class="navbar-nav mr-auto nav-pills" *ngIf="loggedIn$ | async">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" *ngIf="admin$ | async">
+          <a class="nav-link" routerLink="/invitations" routerLinkActive="active">Invitations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/guests" routerLinkActive="active">Guests</a>
+        </li>
+      </ul>
+      <div class="login pt-2 pt-md-0">
+        <div *ngIf="!(loggedIn$ | async)">
+          <a class="btn btn-light" data-toggle="modal" data-target="#login-modal">Login</a>
+        </div>
+        <div *ngIf="loggedIn$ | async" class="text-light">
+          <span class="mr-2">{{userName$ | async}}</span>
+          <a class="btn btn-danger" (click)="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="outlet mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" #closeButton class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group col-md-8 offset-md-2">
+          <label>
+            Invitation key
+            <input type="text" class="form-control" placeholder="Enter invitation key" [value]="invitationKey" (input)="invitationKey=$event.target.value">
+          </label>
+          <app-validation-message [validationError]="invitationKeyError"></app-validation-message>
+        </div>
+      </div>
+      <div class="modal-footer pl-md-4">
+        <button class="btn btn-danger col-6" (click)="loginGoogle()" [disabled]="!invitationKey">
+          <fa name="google" class="mr-1"></fa>
+          Login with Google
+        </button>
+        <button class="btn btn-primary col-6" (click)="loginFacebook()" [disabled]="!invitationKey">
+          <fa name="facebook" class="mr-1"></fa>
+          Login with Facebook
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

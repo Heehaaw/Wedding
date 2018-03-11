@@ -1,0 +1,27 @@
+<section class="p-0 pb-3 pt-3">
+
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <th scope="col">Mail<br>Name</th>
+      <th scope="col">Will attend<br/>With +1?</th>
+      <th scope="col">Phone<br>Phone of +1</th>
+      <th scope="col">Food<br/>Food of +1</th>
+      <th scope="col">Drink<br/>Drink of +1</th>
+      <th scope="col">Accomodation</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let guest of (guests$ | async)">
+      <td>{{guest.email}}<br/>{{guest.name}}</td>
+      <td>{{guest.willAttend}}<br/>{{guest.plus1}}</td>
+      <td>{{guest.phone}}<br/>{{guest.phone1}}</td>
+      <td>{{guest.food}}<br/>{{guest.food1}}</td>
+      <td>{{guest.drink}}<br/>{{guest.drink1}}</td>
+      <td>{{guest.accomodation}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</section>

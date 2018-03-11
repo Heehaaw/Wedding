@@ -1,0 +1,38 @@
+<section class="p-0 pb-3 pt-3">
+
+  <div class="ml-3 mb-3">
+    <button class="btn btn-primary" (click)="onNewInvitation()">New invitation</button>
+  </div>
+
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <th scope="col">Invitation key</th>
+      <th scope="col">Can bring +1?</th>
+      <th scope="col" class="text-right">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let inv of invitations$ | async">
+      <td>
+        <input type="text" class="form-control" [value]="inv.invitationKey" (change)="inv.invitationKey = $event.target.value">
+      </td>
+      <td>
+        <input type="checkbox" [checked]="inv.plus1Able" (change)="inv.plus1Able = $event.target.checked">
+      </td>
+      <td class="text-right">
+        <button class="btn btn-primary" (click)="onUpdateInvitation(inv)">
+          <fa name="save"></fa>
+          Update
+        </button>
+        <button class="btn btn-danger mt-2 mt-md-0" (click)="onDeleteInvitation(inv)">
+          <fa name="trash"></fa>
+          Delete
+        </button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</section>

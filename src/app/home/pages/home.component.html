@@ -1,0 +1,11 @@
+<div class="section" *ngIf="!(loggedIn$ | async)">
+  <app-not-logged-in></app-not-logged-in>
+</div>
+<div *ngIf="loggedIn$ | async">
+  <div class="section">
+    <app-guest-form></app-guest-form>
+  </div>
+  <div class="section mt-3">
+    <app-info></app-info>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10001;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25vh;
+  height: 25vh;
+  transform: translate(-50%, -50%);
+  font-size: 20vh;
+  z-index: 10002;
+}
+
+:host /deep/ .big-cog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  i {
+    animation: spin 1s infinite linear;
+  }
+}
+
+:host /deep/ .small-cog {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 10vh;
+
+  i {
+    animation: spin-ccw 0.5s infinite linear;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(90deg)
+  }
+}
+
+@keyframes spin-ccw {
+  from {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(-90deg)
+  }
+}
+
