@@ -6,12 +6,13 @@
     "ng": "ng",
     "start": "ng serve",
     "hmr": "ng serve --hmr -e=hmr",
-    "build": "ng build --prod && npm run gzip -- dist && npm run webpc -- dist",
+    "build": "ng build --prod && npm run async-styles -- dist && npm run gzip -- dist && npm run webpc -- dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "webpc": "node ./build-scripts/webpc.js",
-    "gzip": "node ./build-scripts/gzip.js"
+    "gzip": "node ./build-scripts/gzip.js",
+    "async-styles": "node ./build-scripts/async-styles.js"
   },
   "private": true,
   "dependencies": {

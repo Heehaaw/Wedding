@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { SpinnerService } from './common/spinner-module/spinner.service';
 
 @Component({
@@ -8,12 +8,15 @@ import { SpinnerService } from './common/spinner-module/spinner.service';
     <app-spinner></app-spinner>
   `
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  constructor(private spinner: SpinnerService){
+  constructor(private spinner: SpinnerService, private myElement: ElementRef) {
   }
 
   public ngOnInit(): void {
     this.spinner.start();
+    setTimeout(
+      () => this.myElement.nativeElement.nextElementSibling && this.myElement.nativeElement.nextElementSibling.remove(),
+      3000);
   }
 }
