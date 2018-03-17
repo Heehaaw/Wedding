@@ -33,7 +33,7 @@ export class AuthService {
         }
         return Promise.reject(err);
       })
-      .then(() => this.spinner.stop());
+      .then(() => this.spinner.stop(), () => this.spinner.stop());
   }
 
   public loginGoogle = () => this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());

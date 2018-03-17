@@ -9,9 +9,9 @@ export enum AttendEnum {
 export namespace AttendEnum {
   export const attendMap: {} =
     {
-      [AttendEnum.WILL_NOT_ATTEND]: 'I will not attend',
-      [AttendEnum.WILL_ATTEND]: 'I will attend',
-      [AttendEnum.WILL_ATTEND_PLUS_1]: 'I will attend +1',
+      [AttendEnum.WILL_NOT_ATTEND]: 'Nepřijdu',
+      [AttendEnum.WILL_ATTEND]: 'Přijdu',
+      [AttendEnum.WILL_ATTEND_PLUS_1]: 'Přijdu s +1',
     };
 
 }

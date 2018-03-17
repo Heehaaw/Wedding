@@ -1,23 +1,13 @@
-import { ApplicationRef, enableProdMode, NgModuleRef } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { createNewHosts } from '@angularclass/hmr';
+import { hmrBootstrap } from './app/common/hmr';
 
 if (environment.production) {
   enableProdMode();
 }
-
-const hmrBootstrap = async (module: any, bootstrap: () => Promise<NgModuleRef<AppModule>>) => {
-  module.hot.accept();
-  let ngModule: NgModuleRef<AppModule> = await bootstrap();
-  ngModule && module.hot.dispose(() => {
-    const makeVisible = createNewHosts(ngModule.injector.get(ApplicationRef).components.map(c => c.location.nativeElement));
-    ngModule.destroy();
-    makeVisible();
-  });
-};
 
 const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule).catch(err => {
   console.log(err);

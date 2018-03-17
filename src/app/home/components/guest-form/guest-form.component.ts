@@ -33,6 +33,7 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
 
   public plus1Able$: Observable<boolean>;
   public isPlus1: boolean;
+  public willCome: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -56,7 +57,6 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
       drink1: [this.guest.drink1, Validators.required]
     });
 
-
     this.guestSubscription = this.authService.user$
       .switchMap(u => u ? this.guestService.findByEmail(u.email) : Observable.empty<GuestModel>())
       .withLatestFrom(this.authService.user$)
@@ -74,20 +74,31 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
 
     this.form.valueChanges.subscribe(data => {
       let wasPlus1 = this.isPlus1;
+      let wasWillCome1 = this.willCome;
       this.isPlus1 = data['willAttend'] === AttendEnum.WILL_ATTEND_PLUS_1;
+      this.willCome = data['willAttend'] !== AttendEnum.WILL_NOT_ATTEND;
+
       if (wasPlus1 !== this.isPlus1) {
-        const fnName = this.isPlus1 ? 'enable' : 'disable';
-        for (let cn of ['phone1', 'food1', 'drink1']) {
-          let c = this.form.controls[cn];
-          c[fnName]();
-          if (!this.isPlus1) {
-            c.setValue(null);
-          }
-        }
+        this.processFields(['phone1', 'food1', 'drink1'], this.isPlus1);
       }
+      if (wasWillCome1 !== this.willCome) {
+        this.processFields(['phone', 'food', 'drink', 'accomodation'], this.willCome);
+      }
+
       this.updateValidationErrors();
     });
 
+  }
+
+  private processFields(fields: string[], condition) {
+    const fnName = condition ? 'enable' : 'disable';
+    for (let cn of fields) {
+      let c = this.form.controls[cn];
+      c[fnName]();
+      if (!condition) {
+        c.setValue(null);
+      }
+    }
   }
 
   public initFormErrors(): any {
@@ -117,8 +128,8 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
   public onUpdateGuest() {
     this.spinner.start();
     const g = { ...this.guest, ...this.form.getRawValue() };
-    (this.guest.id ? this.guestService.update(g) : this.guestService.add(g))
-      .then(() => this.spinner.stop());
+    let p: Promise<any> = this.guest.id ? this.guestService.update(g) : this.guestService.add(g);
+    p.catch(() => this.spinner.stop()).then(() => this.spinner.stop());
   }
 
   ngOnDestroy() {

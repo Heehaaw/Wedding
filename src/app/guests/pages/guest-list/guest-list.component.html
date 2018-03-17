@@ -1,21 +1,31 @@
 <section class="p-0 pb-3 pt-3">
 
+  <div class="col-12 mb-3">
+
+    <div class="col-md-4">
+      <div>Vyplňené pozvánky: <b>{{total}}</b></div>
+      <div>Počet hostů: <b>{{guestSum}}</b></div>
+      <div>Z toho +1: <b>{{plus1Sum}}</b></div>
+      <div>Hosti s ubytováním: <b>{{needsRoomSum}}</b></div>
+    </div>
+  </div>
+
   <table class="table table-striped ">
     <thead>
     <tr>
-      <th scope="col">Mail<br>Name</th>
-      <th scope="col">Will attend<br/>With +1?</th>
-      <th scope="col">Phone<br>Phone of +1</th>
-      <th scope="col">Food<br/>Food of +1</th>
-      <th scope="col">Drink<br/>Drink of +1</th>
-      <th scope="col">Accomodation</th>
+      <th scope="col">Mail<br>Jméno</th>
+      <th scope="col">Přijde?</th>
+      <th scope="col">Telefon<br>Telefon +1</th>
+      <th scope="col">Jídlo<br/>Jídlo +1</th>
+      <th scope="col">Pití<br/>Pití +1</th>
+      <th scope="col">Ubytování</th>
     </tr>
     </thead>
     <tbody>
 
     <tr *ngFor="let guest of (guests$ | async)">
       <td>{{guest.email}}<br/>{{guest.name}}</td>
-      <td>{{guest.willAttend}}<br/>{{guest.plus1}}</td>
+      <td>{{guest.willAttend}}</td>
       <td>{{guest.phone}}<br/>{{guest.phone1}}</td>
       <td>{{guest.food}}<br/>{{guest.food1}}</td>
       <td>{{guest.drink}}<br/>{{guest.drink1}}</td>

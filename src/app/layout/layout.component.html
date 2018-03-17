@@ -1,9 +1,16 @@
 <div class="col-md-8 offset-md-2 p-0 wrap">
 
+  <div class="row ml-1 mr-1">
+    <div class="col-4 col-md-3 col-lg-2 bird-wrap">
+      <img src="/images/bird.jpg" class="bird">
+    </div>
+    <div class="text-right headline col-8 col-md-9 col-lg-10">Už je to tak<br/>... budeme se brát!<br/>Věrka + Janek</div>
+  </div>
+
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="#">Wedding</a>
-
+    <!--<a class="navbar-brand" href="/">Svatební oznámení</a>-->
+    <div></div>
     <button class="navbar-toggler float-right"
             type="button"
             data-toggle="collapse"
@@ -16,23 +23,23 @@
 
     <div id="navbar" class="collapse navbar-collapse pt-2 pt-md-0">
       <ul class="navbar-nav mr-auto nav-pills" *ngIf="loggedIn$ | async">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item mr-1">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Moje Pozvánka <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf="admin$ | async">
-          <a class="nav-link" routerLink="/invitations" routerLinkActive="active">Invitations</a>
+        <li class="nav-item mr-1" *ngIf="admin$ | async">
+          <a class="nav-link" routerLink="/invitations" routerLinkActive="active">Výroba pozvánek</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/guests" routerLinkActive="active">Guests</a>
+          <a class="nav-link" routerLink="/guests" routerLinkActive="active">Hosti</a>
         </li>
       </ul>
-      <div class="login pt-2 pt-md-0">
+      <div class="login pt-2 pt-md-0 text-right">
         <div *ngIf="!(loggedIn$ | async)">
-          <a class="btn btn-light" data-toggle="modal" data-target="#login-modal">Login</a>
+          <a class="btn btn-light" data-toggle="modal" data-target="#login-modal">Přihlášení</a>
         </div>
         <div *ngIf="loggedIn$ | async" class="text-light">
           <span class="mr-2">{{userName$ | async}}</span>
-          <a class="btn btn-danger" (click)="logout()">Logout</a>
+          <a class="btn btn-danger" (click)="logout()">Odhlášení</a>
         </div>
       </div>
     </div>
@@ -49,7 +56,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Login</h5>
+        <h5 class="modal-title">Přihlášení</h5>
         <button type="button" #closeButton class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -57,8 +64,8 @@
       <div class="modal-body">
         <div class="form-group col-md-8 offset-md-2">
           <label>
-            Invitation key
-            <input type="text" class="form-control" placeholder="Enter invitation key" [value]="invitationKey" (input)="invitationKey=$event.target.value">
+            Pozvánkový klíč
+            <input type="text" class="form-control" placeholder="Vlož klíč pozvánky" [value]="invitationKey" (input)="invitationKey=$event.target.value">
           </label>
           <app-validation-message [validationError]="invitationKeyError"></app-validation-message>
         </div>
@@ -66,11 +73,11 @@
       <div class="modal-footer pl-md-4">
         <button class="btn btn-danger col-6" (click)="loginGoogle()" [disabled]="!invitationKey">
           <fa name="google" class="mr-1"></fa>
-          Login with Google
+          Přihlaš přes Google
         </button>
         <button class="btn btn-primary col-6" (click)="loginFacebook()" [disabled]="!invitationKey">
           <fa name="facebook" class="mr-1"></fa>
-          Login with Facebook
+          Přihlaš přes Facebook
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
+        "images",
         { "glob": "appsettings*.json", "input": "../", "output": "." }
       ],
       "index": "index.html",

@@ -1,8 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { AngularFirestore, AngularFirestoreCollection, QueryFn } from 'angularfire2/firestore';
+import { AngularFirestore, QueryFn } from 'angularfire2/firestore';
 import { BaseModel } from '../models/base.model';
-import 'rxjs/add/operator/toArray';
-import 'rxjs/add/operator/toPromise';
 
 export abstract class FirestoreService<T extends BaseModel> {
 
@@ -22,7 +20,8 @@ export abstract class FirestoreService<T extends BaseModel> {
     model.timestamp = new Date().getTime();
     let ref = await this.getCollection().add(model);
     model.id = ref.id;
-    return this.update(model);
+    await this.update(model);
+    return ref;
   }
 
   public update = (model: T): Promise<void> => this.getCollection().doc(model.id).update(model);

@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SpinnerService } from './spinner.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss']
 })
-export class SpinnerComponent implements OnInit{
+export class SpinnerComponent implements AfterViewInit {
 
-  public active: boolean;
+  public active$: Observable<boolean>;
 
-  constructor(spinnerService: SpinnerService) {
-    spinnerService.status.subscribe((active: boolean) => {
-      this.active = active;
-    });
+  constructor(private spinnerService: SpinnerService) {
+    this.active$ = spinnerService.status;
   }
 
-  public ngOnInit(): void {
-    this.active = true;
+  public ngAfterViewInit(): void {
+    this.spinnerService.start();
   }
 
 }

@@ -2,13 +2,15 @@
 
 export enum AccomodationEnum {
   ROOM = 'ROOM',
+  TEEPEE = 'TEEPEE',
   TENT = 'TENT'
 }
 
 export namespace AccomodationEnum {
   export const accomodationOptions: IOption[] = [
-    { key: 'ROOM', value: 'I need a room' },
-    { key: 'TENT', value: 'I will bring a tent' }
+    { key: AccomodationEnum.ROOM, value: 'Vyžaduji ubytování' },
+    { key: AccomodationEnum.TEEPEE, value: 'Chci spát v teepee' },
+    { key: AccomodationEnum.TENT, value: 'Přivezu si stan' }
   ];
 
   export const accomodationMap = accomodationOptions.reduce((prev, curr) => {

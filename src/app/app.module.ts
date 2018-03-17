@@ -18,6 +18,7 @@ import { InvitationModule } from './invitation/invitation.module';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { CommonAppModule } from './common/common-app.module';
 import { GuestsModule } from './guests/guests.module';
+import { hmrState } from './common/hmr';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { GuestsModule } from './guests/guests.module';
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
+    hmrState.isPersistance ? AngularFirestoreModule : (hmrState.isPersistance = true) && AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AngularFontAwesomeModule,
@@ -39,8 +40,7 @@ import { GuestsModule } from './guests/guests.module';
     InvitationModule,
     GuestsModule
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

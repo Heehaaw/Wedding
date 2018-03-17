@@ -2,13 +2,15 @@ import { IOption } from './option.interface';
 
 export enum FoodEnum {
   ALL = 'ALL',
-  VEGAN = 'VEGAN'
+  VEGAN = 'VEGAN',
+  OTHER = 'OTHER'
 }
 
 export namespace FoodEnum {
   export const foodOptions: IOption[] = [
-    { key: FoodEnum.ALL, value: 'I will eat anything' },
-    { key: FoodEnum.VEGAN, value: 'Vegan' }
+    { key: FoodEnum.ALL, value: 'Zbaštím cokoli' },
+    { key: FoodEnum.VEGAN, value: 'Vegan/vegetarián' },
+    { key: FoodEnum.OTHER, value: 'Jiná úchylka' }
   ];
 
   export const foodMap = foodOptions.reduce((prev, curr) => {

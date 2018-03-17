@@ -6,6 +6,8 @@ import { AccomodationEnum } from '../../../common/models/accomodation.enum';
 import { AttendEnum } from '../../../common/models/attend.enum';
 import { FoodEnum } from '../../../common/models/food.enum';
 import { DrinkEnum } from '../../../common/models/drink.enum';
+import 'rxjs/add/operator/reduce';
+
 
 @Component({
   selector: 'app-guest-list',
@@ -14,22 +16,49 @@ import { DrinkEnum } from '../../../common/models/drink.enum';
 })
 export class GuestListComponent implements OnInit {
 
-  public guests$: Observable<({ plus1: string } & GuestModel)[]>;
+  public guests$: Observable<GuestModel[]>;
+
+  public guestSum = 0;
+  public plus1Sum = 0;
+  public total = 0;
+  public needsRoomSum = 0;
 
   constructor(private guestService: GuestService) {
-    this.guests$ = this.guestService.all().map(gs => gs.map((g: { plus1: string } & GuestModel) => {
-      let willAttend = g.willAttend === AttendEnum.WILL_ATTEND_PLUS_1;
-      g.plus1 = willAttend ? 'Yep' : 'Nope';
-      g.willAttend = AttendEnum.attendMap[g.willAttend];
-      g.food = FoodEnum.foodMap[g.food];
-      g.drink = DrinkEnum.drinkMap[g.drink];
-      g.accomodation = AccomodationEnum.accomodationMap[g.accomodation];
-      if (willAttend) {
-        g.food1 = FoodEnum.foodMap[g.food1];
-        g.drink1 = DrinkEnum.drinkMap[g.drink1];
-      }
-      return g;
-    }));
+
+    this.guests$ = this.guestService.all().map(gs => {
+
+      this.guestSum = this.plus1Sum = this.total = this.needsRoomSum = 0;
+
+      return gs.map((g: GuestModel) => {
+
+        this.updateSums(g);
+
+        let plus1 = g.willAttend === AttendEnum.WILL_ATTEND_PLUS_1;
+        g.willAttend = AttendEnum.attendMap[g.willAttend];
+        g.food = FoodEnum.foodMap[g.food];
+        g.drink = DrinkEnum.drinkMap[g.drink];
+        g.accomodation = AccomodationEnum.accomodationMap[g.accomodation];
+        if (plus1) {
+          g.food1 = FoodEnum.foodMap[g.food1];
+          g.drink1 = DrinkEnum.drinkMap[g.drink1];
+        }
+        return g;
+      });
+    });
+  }
+
+  private updateSums(g: GuestModel) {
+    this.total++;
+    if(g.accomodation === AccomodationEnum.ROOM){
+      this.needsRoomSum++;
+    }
+    if (g.food1) {
+      this.guestSum += 2;
+      this.plus1Sum++;
+    }
+    else {
+      this.guestSum++;
+    }
   }
 
   ngOnInit() {
