@@ -18,13 +18,13 @@
 
   <style>
 
-    app-root:empty + .loader {
-      opacity: 1;
-    }
+    /*app-root:empty + .loader {*/
+      /*opacity: 1;*/
+    /*}*/
 
-    app-root:empty + .loader .spinner {
-      opacity: 1;
-    }
+    /*app-root:empty + .loader .spinner {*/
+      /*opacity: 1;*/
+    /*}*/
 
     .loader {
       position: absolute;
@@ -33,11 +33,11 @@
       top: 0;
       left: 0;
       z-index: 1000;
-      opacity: 0;
+      /*opacity: 0;*/
       background: #fff;
 
-      -webkit-transition: opacity .8s ease-out;
-      transition: opacity .8s ease-out;
+      -webkit-transition: opacity 1.2s ease-out;
+      transition: opacity 1.2s ease-out;
     }
 
     .spinner {
@@ -46,7 +46,7 @@
       height: 10vw;
       position: relative;
       text-align: center;
-      opacity: 0;
+      /*opacity: 0;*/
 
       -webkit-animation: sk-rotate 2.0s infinite linear;
       animation: sk-rotate 2.0s infinite linear;
@@ -114,12 +114,14 @@
   </style>
 </head>
 <body>
-<app-root></app-root>
+<app-root>
+
 <div class="loader">
   <div class="spinner">
     <div class="dot1"></div>
     <div class="dot2"></div>
   </div>
 </div>
+</app-root>
 </body>
 </html>

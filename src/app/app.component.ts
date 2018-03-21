@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spinner.start();
-    setTimeout(
-      () => this.myElement.nativeElement.nextElementSibling && this.myElement.nativeElement.nextElementSibling.remove(),
-      3000);
+    // setTimeout(
+    //   () => this.myElement.nativeElement.nextElementSibling && this.myElement.nativeElement.nextElementSibling.remove(),
+    //   3000);
   }
 }
