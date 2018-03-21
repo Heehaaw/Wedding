@@ -11,6 +11,7 @@
         "assets",
         "favicon.ico",
         "images",
+        "manifest.json",
         { "glob": "appsettings*.json", "input": "../", "output": "." }
       ],
       "index": "index.html",
