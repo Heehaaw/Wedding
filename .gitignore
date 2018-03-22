@@ -47,3 +47,5 @@ Thumbs.db
 
 # ng
 /node_modules
+
+dist-server

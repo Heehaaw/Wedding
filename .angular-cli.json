@@ -12,7 +12,11 @@
         "favicon.ico",
         "images",
         "manifest.json",
-        { "glob": "appsettings*.json", "input": "../", "output": "." }
+        {
+          "glob": "appsettings*.json",
+          "input": "../",
+          "output": "."
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -24,7 +28,8 @@
       "serviceWorker": true,
       "styles": [
         "styles.scss",
-        "../node_modules/font-awesome/css/font-awesome.css"
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [
         "../node_modules/jquery/jquery.min.js",
@@ -64,7 +69,6 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {
-    }
+    "component": {}
   }
 }

@@ -14,6 +14,7 @@ import { GuestService } from '../../../guests/services/guest.service';
 import { SpinnerService } from '../../../common/spinner-module/spinner.service';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/empty';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-guest-form',
@@ -39,7 +40,8 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
               private authService: AuthService,
               private guestService: GuestService,
               private spinner: SpinnerService,
-              private invitationService: InvitationService) {
+              private invitationService: InvitationService,
+              private toastr: ToastrService) {
 
     super();
   }
@@ -129,7 +131,13 @@ export class GuestFormComponent extends SingleFormBaseComponent implements OnIni
     this.spinner.start();
     const g = { ...this.guest, ...this.form.getRawValue() };
     let p: Promise<any> = this.guest.id ? this.guestService.update(g) : this.guestService.add(g);
-    p.catch(() => this.spinner.stop()).then(() => this.spinner.stop());
+    p.catch(() => {
+      this.spinner.stop();
+      this.toastr.error('Něco se pokazilo, zkuste to prosím později...');
+    }).then(() => {
+      this.spinner.stop();
+      this.toastr.success('Změny úspěšně uloženy!');
+    });
   }
 
   ngOnDestroy() {

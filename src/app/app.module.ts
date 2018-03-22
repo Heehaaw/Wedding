@@ -19,6 +19,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { CommonAppModule } from './common/common-app.module';
 import { GuestsModule } from './guests/guests.module';
 import { hmrState } from './common/hmr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,15 @@ import { hmrState } from './common/hmr';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    /*hmrState.isPersistance ? AngularFirestoreModule : (hmrState.isPersistance = true) && */AngularFirestoreModule.enablePersistence(),
+    hmrState.isPersistance ? AngularFirestoreModule : (hmrState.isPersistance = true) && AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AngularFontAwesomeModule,
+    ToastrModule.forRoot(),
     SpinnerModule,
     CommonAppModule,
     HomeModule,
