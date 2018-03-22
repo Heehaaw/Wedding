@@ -33,7 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    hmrState.isPersistance ? AngularFirestoreModule : (hmrState.isPersistance = true) && AngularFirestoreModule.enablePersistence(),
+    /*hmrState.isPersistance ? AngularFirestoreModule : (hmrState.isPersistance = true) && */AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AngularFontAwesomeModule,

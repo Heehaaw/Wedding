@@ -20,6 +20,7 @@ export class GuestListComponent implements OnInit {
 
   public guestSum = 0;
   public plus1Sum = 0;
+  public notCommingSum = 0;
   public total = 0;
   public needsRoomSum = 0;
 
@@ -27,7 +28,7 @@ export class GuestListComponent implements OnInit {
 
     this.guests$ = this.guestService.all().map(gs => {
 
-      this.guestSum = this.plus1Sum = this.total = this.needsRoomSum = 0;
+      this.guestSum = this.plus1Sum = this.notCommingSum = this.total = this.needsRoomSum = 0;
 
       return gs.map((g: GuestModel) => {
 
@@ -49,12 +50,15 @@ export class GuestListComponent implements OnInit {
 
   private updateSums(g: GuestModel) {
     this.total++;
-    if(g.accomodation === AccomodationEnum.ROOM){
+    if (g.accomodation === AccomodationEnum.ROOM) {
       this.needsRoomSum++;
     }
     if (g.food1) {
       this.guestSum += 2;
       this.plus1Sum++;
+    }
+    else if (g.willAttend === AttendEnum.WILL_NOT_ATTEND) {
+      this.notCommingSum++;
     }
     else {
       this.guestSum++;
