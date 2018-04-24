@@ -9,3 +9,31 @@ section {
 p {
   margin: 15px;
 }
+
+.video-wrap {
+
+  width: 100%;
+
+  .video-inner-wrap {
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-top: 33%;
+    position: relative;
+
+    .video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+@media(max-width: 992px) {
+  .video-wrap .video-inner-wrap {
+    padding-top: 40%;
+  }
+}
