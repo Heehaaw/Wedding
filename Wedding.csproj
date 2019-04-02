@@ -8,11 +8,4 @@
     <EmbeddedResource Remove="node_modules\**" />
     <Compile Remove="node_modules\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\app\guests\pages" />
-    <Folder Include="src\app\guests\services" />
-    <Folder Include="src\app\home\components" />
-    <Folder Include="src\app\home\models" />
-    <Folder Include="src\app\invitation\pages" />
-  </ItemGroup>
 </Project>
